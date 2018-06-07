@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/bg1"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="40dp"
+                  android:orientation="vertical"
+                  android:layout_gravity="center">
+        <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="未登录" />
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="20dp"
+                      android:layout_gravity="center">
+            <Button
+                    android:id="@+id/Btn_Login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bt_shape"
+                    android:text="登录" />
+
+            <Button
+                    android:id="@+id/Btn_Regist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bt_shape"
+                    android:layout_marginLeft="20dp"
+                    android:text="注册" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_corner"
+            android:id="@+id/linebantouming1">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/school"/>
+
+            <TextView
+                    android:text="学校"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:id="@+id/textViewSchool"
+                    android:layout_weight="1"/>
+
+        </LinearLayout>
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#aac0c0c0" />
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/studentid"/>
+            <TextView
+                    android:text="学号"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:id="@+id/textViewID"
+                    android:layout_weight="1"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_corner"
+            android:id="@+id/linebantouming2">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/coins"/>
+
+            <TextView
+                    android:text="总积分"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/allPoints"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#aac0c0c0" />
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/used"/>
+
+            <TextView
+                    android:text="已消费积分"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/usedPoints"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#aac0c0c0" />
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/bill"/>
+            <TextView
+                    android:text="历史账单"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/History_bill"
+                    android:layout_weight="1"/>
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/right"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_corner"
+            android:id="@+id/linebantouming3">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/content"/>
+
+            <TextView
+                    android:text="紧急联系人"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/Emergency_Contact"
+                    android:layout_weight="1"/>
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/right"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_corner"
+            android:id="@+id/linebantouming4">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/shaddress"/>
+
+            <TextView
+                    android:text="收货地址"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/ShAddress"
+                    android:layout_weight="1"/>
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/right"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
