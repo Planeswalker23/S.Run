@@ -171,11 +171,10 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:onClick="handleBookButton"
         android:layout_gravity="center"
         android:textColor="@color/bg"
         android:layout_marginTop="15dp"
         android:background="@drawable/bt_shape"
         android:textSize="15dp"
-        android:text="预约打卡" />
+        android:text="参加挑战" />
 </LinearLayout>

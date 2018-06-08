@@ -4,28 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginBottom="10dp"
+                  android:layout_height="match_parent">
+        <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mall" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/mall" />
+        <TextView
+                android:id="@+id/goodNamePrice"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:text="商品名和价格"
+                android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/goodNamePrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="商品名和价格"
-        android:textSize="15dp" />
+        <Button
+                android:id="@+id/buttonBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bt_shape"
+                android:textColor="@color/bg"
+                android:layout_marginRight="10dp"
+                android:text="兑换"
+                android:textSize="20sp" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="购买"
-        android:textSize="20sp" />
+
 
 </LinearLayout>

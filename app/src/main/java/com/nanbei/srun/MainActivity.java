@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import entity.LocalUser;
+import util.NotificationService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -135,7 +136,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 
 }

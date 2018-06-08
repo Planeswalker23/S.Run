@@ -47,7 +47,9 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"
@@ -61,7 +63,6 @@
                     android:textSize="20dp"
                     android:id="@+id/textViewSchool"
                     android:layout_weight="1"/>
-
         </LinearLayout>
         <View
                 android:layout_width="fill_parent"
@@ -70,7 +71,9 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"
@@ -83,7 +86,6 @@
                     android:textSize="20dp"
                     android:id="@+id/textViewID"
                     android:layout_weight="1"/>
-
         </LinearLayout>
     </LinearLayout>
 
@@ -97,7 +99,9 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"
@@ -112,6 +116,13 @@
                     android:textSize="20dp"
                     android:id="@+id/allPoints"
                     android:layout_weight="1"/>
+            <TextView
+                    android:id="@+id/showAllPointsid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:textSize="20dp"
+                    android:text="" />
         </LinearLayout>
         <View
                 android:layout_width="fill_parent"
@@ -120,7 +131,9 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"
@@ -135,6 +148,13 @@
                     android:textSize="20dp"
                     android:id="@+id/usedPoints"
                     android:layout_weight="1"/>
+            <TextView
+                    android:id="@+id/showUsedPointsid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:textSize="20dp"
+                    android:text="" />
         </LinearLayout>
         <View
                 android:layout_width="fill_parent"
@@ -143,7 +163,8 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"
@@ -174,7 +195,8 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"
@@ -205,7 +227,8 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp">
             <ImageView android:layout_width="20dp"
                        android:layout_height="20dp"
                        android:layout_gravity="center"

@@ -21,6 +21,8 @@ import entity.LocalUser;
 
 public class MyspaceInFragment extends Fragment {
     private Button btn;
+
+    private Button btnMedal;
     private LocalUserManager localUserManager;
     private LocalUser localUser;
     private String idvalue;
@@ -53,6 +55,17 @@ public class MyspaceInFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        btnMedal=  (Button)view.findViewById(R.id.showmedal);
+        btnMedal.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MedalActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }

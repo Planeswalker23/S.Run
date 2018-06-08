@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment{
 
     private Button btn;
     private Button btCalender;
+    private Button btBookButton;
 
     private String idvalue;
     private String schoolvalue;
@@ -60,6 +61,16 @@ public class HomeFragment extends Fragment{
         idvalue = (String)getArguments().get("idvalue");
         schoolvalue = (String)getArguments().get("schoolvalue");
         passwordvalue = (String)getArguments().get("passwordvalue");
+
+        //打卡按钮
+        btBookButton = (Button) view.findViewById(R.id.BookButton);
+        btBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChallengeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //日历
