@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import okhttp3.Call;
@@ -51,6 +52,8 @@ public class HomeFragment extends Fragment{
     TextView tvCalorie;
 
 //    private OnButtonClick onButtonClick;
+
+    DecimalFormat df = new DecimalFormat("#.00");
 
     @Nullable
     @Override
@@ -299,6 +302,12 @@ public class HomeFragment extends Fragment{
                             @Override
                             public void run() {
                                 System.out.println(calories);
+                                if (totalDistance != 0.0){
+                                    totalDistance = Double.parseDouble(df.format(totalDistance));
+                                }
+                                if (calories != 0.0){
+                                    calories = Double.parseDouble(df.format(calories));
+                                }
                                 tvDistance.setText("" + totalDistance);
                                 tvCalorie.setText("" + calories);
                             }

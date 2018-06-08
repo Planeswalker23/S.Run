@@ -2,9 +2,10 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#20B2AA</color>
     <color name="bg">#fff</color>
     <color name="bantouming">#90000000</color>
+
 
 
 
