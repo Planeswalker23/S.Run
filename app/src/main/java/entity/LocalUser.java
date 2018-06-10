@@ -7,6 +7,7 @@ package entity;
 public class LocalUser {
     private String school;
     private String id;
+    private String usernmame;
     private String password;
 
     public String getSchool() {
@@ -23,6 +24,14 @@ public class LocalUser {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUsernmame() {
+        return usernmame;
+    }
+
+    public void setUsernmame(String usernmame) {
+        this.usernmame = usernmame;
     }
 
     public String getPassword() {

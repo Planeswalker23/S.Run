@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/create_user_dialog_view"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg"
+              android:minWidth="200dp"
+              android:padding="10dp"
+              android:paddingBottom="30dp"
+              android:paddingTop="30dp">
+
+    <EditText
+            android:id="@+id/text_input"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg"
+            android:hint=""
+            android:minHeight="45dp"
+            android:textSize="18sp" />
+
+    <Button
+            android:id="@+id/btn_save_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/bg"
+            android:gravity="center"
+            android:text="确定" />
+
+</LinearLayout>

@@ -12,7 +12,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import entity.LocalUser;
-import util.NotificationService;
+//import util.NotificationService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         userBundle.putString("idvalue",localUser.getId());
         userBundle.putString("schoolvalue",localUser.getSchool());
         userBundle.putString("passwordvalue",localUser.getPassword());
+        userBundle.putString("usernamevalue",localUser.getUsernmame());
         //System.out.print("lll::"+localUser.getId());
 
 

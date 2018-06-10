@@ -1,15 +1,23 @@
 package com.nanbei.srun;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,14 +57,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 此demo实现时时动态画运动轨迹
  * author zhh
  */
 public class DynamicDemo extends Activity implements SensorEventListener {
+
+    DecimalFormat df = new DecimalFormat("#.00");
+    private MediaPlayer mediaPlayer = new MediaPlayer();
 
     //计时相关
     private long startTime;
@@ -65,19 +79,24 @@ public class DynamicDemo extends Activity implements SensorEventListener {
     // 定位相关
     private LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
-    private int mCurrentDirection = 0;
-    private double mCurrentLat = 0.0;
-    private double mCurrentLon = 0.0;
+    private int mCurrentDirection;
+    private double mCurrentLat;
+    private double mCurrentLon;
 
     private MapView mMapView;
     private BaiduMap mBaiduMap;
-    private Button btSavePath;
     private Button btMyLocation;
     private Button btPeopleAroundYou;
-    private Button btMovementDate;
 
     private TextView info;
     private RelativeLayout progressBarRl;
+
+    private TextView timer_tv_1, TextView_map_distance, showcalorie, showSpeed, getpoint;
+
+    private Timer timer = null;
+    private TimerTask timerTask = null;
+    private int i = 0;
+
 
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
@@ -85,6 +104,10 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
     private SensorManager mSensorManager;
     private Context context;
+
+    private String time_hh, time_mm, time_ss, time_m, time_s;
+    private String dis, caluli, timePerKM;
+    private String score_Share;
 
     //是否开启画笔
     private boolean isOpenDraw = false;
@@ -121,7 +144,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
     //定义用户运动起始、结束点以及距离
     private LatLng startPlace;
     private LatLng endPlace;
-    private double distance;
+    private double distance = 0.0;
 
     //运动类型
     private String sportsType;
@@ -133,6 +156,14 @@ public class DynamicDemo extends Activity implements SensorEventListener {
         this.context = this;
 
         sportsType = "run";
+
+        if (ContextCompat.checkSelfPermission(DynamicDemo.this, Manifest.permission.
+                WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(DynamicDemo.this, new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }else{
+            initMediaPlayer(R.raw.startmusic);//初始化MediaPlayer的开始运动资源
+        }
 
         initView();//开始停止按钮初始化
 
@@ -177,6 +208,8 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
         initLocation();//初始化定位
 
+        getPermission();
+
         myLocation();//定位到我当前的位置
 
         showPeopleAroundYou();//绘制测试用户坐标（纬度、经度代表北京）
@@ -200,23 +233,6 @@ public class DynamicDemo extends Activity implements SensorEventListener {
         //获取即使位置
         mLocClient.start();//初次定位
     }
-
-//    private void showMovementDate() {
-//        btMovementDate.setOnClickListener(new OnClickListener() {
-//            @Override
-//        btMovementDate = (Button) findViewById(R.id.movementDate);
-//            public void onClick(View v) {
-//                if (startPlace == null){
-//                    Toast.makeText(context, "尚未开始运动", Toast.LENGTH_SHORT).show();
-//                } else if ( endPlace == null) {
-//                    Toast.makeText(context, "本次运动未结束", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    distance = DistanceUtil.getDistance(startPlace, endPlace);
-//                    Toast.makeText(context, "运动距离为" + distance, Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//    }
 
     private void initOverlay() {
         // add marker overlay
@@ -271,6 +287,12 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
     private void initView() {
 
+        getpoint = (TextView) findViewById(R.id.getpoint);
+        timer_tv_1 = (TextView) findViewById(R.id.timer);
+        TextView_map_distance = (TextView) findViewById(R.id.TextView_map_distance);
+        showcalorie = (TextView) findViewById(R.id.showcalorie);
+        showSpeed = (TextView) findViewById(R.id.showSpeed);
+
         Button start = (Button) findViewById(R.id.buttonStart);
         Button finish = (Button) findViewById(R.id.buttonFinish);
         info = (TextView) findViewById(R.id.info);
@@ -292,8 +314,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                     progressBarRl.setVisibility(View.VISIBLE);
                     info.setText("GPS信号搜索中，请稍后...");
                     mBaiduMap.clear();
-                    Toast.makeText(context, "开始运动", Toast.LENGTH_SHORT).show();
-                    startTime = System.currentTimeMillis();//程序开始记录时间
+                    Toast.makeText(context, "准备开始运动...", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -320,7 +341,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 //                            System.currentTimeMillis() + 3600 * 1000, System.currentTimeMillis() + 2*3600*1000,
 //                            3499.0, 12.1, 121.1);
                     System.out.println(json);
-                    String url="http://10.62.17.191:8080/SportServer/receiveRunData";//服务器接口地址
+                    String url="http://120.79.36.200:8080/SportServer_war/receiveRunData";//服务器接口地址
                     HttpUtil.sendOkHttpRequest(url, json, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
@@ -347,7 +368,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
                     if (isFirstLoc) {
                         points.clear();
-                        last = new LatLng(0, 0);
+                        last = new LatLng(mCurrentLat, mCurrentLon);
                         return;
                     }
 
@@ -361,21 +382,35 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
                     //复位
                     points.clear();
-                    last = new LatLng(0, 0);
+                    last = new LatLng(mCurrentLat, mCurrentLon);
                     isFirstLoc = true;
 
                     isOpenDraw = false;
 
+                    endTime=System.currentTimeMillis();
+                    //计时结束
+                    stopTime();
+
+                    mediaPlayer.reset(); // 停止播放
+                    initMediaPlayer(R.raw.endmusic);//初始化MediaPlayer的结束运动资源
+                    mediaPlayer.start();
 
                     //跳到分享页面
                     Intent intent = new Intent(DynamicDemo.this, ShareActivity.class);
                     //传递参数给ShareActivity
-                    startTime=100;endTime=100;distance=100.0;
-                    intent.putExtra("startTime",startTime);
-                    intent.putExtra("endTime",endTime);
-                    intent.putExtra("distance",distance);
+                    intent.putExtra("score_Share",score_Share);
+                    //时间
+                    intent.putExtra("time_hh",time_hh);
+                    intent.putExtra("time_mm",time_mm);
+                    intent.putExtra("time_ss",time_ss);
+                    //距离
+                    intent.putExtra("dis",dis);
+                    //卡路里
+                    intent.putExtra("caluli",caluli);
+                    //配速
+                    intent.putExtra("time_m",time_m);
+                    intent.putExtra("time_s",time_s);
                     startActivity(intent);
-
                 }
             }
         });
@@ -457,6 +492,15 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                         startPlace = points.get(0);
 
                         progressBarRl.setVisibility(View.GONE);
+
+                        //开始计时
+                        startTime();
+                        startTime = System.currentTimeMillis();//程序开始记录时间
+
+                        if (!mediaPlayer.isPlaying()) {
+                            initMediaPlayer(R.raw.startmusic);//初始化MediaPlayer的开始运动资源
+                            mediaPlayer.start(); // 开始播放
+                        }
 
                         return;//画轨迹最少得2个点，首地定位到这里就可以返回了
                     }
@@ -628,5 +672,122 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            Toast.makeText(this, "必须同意所有权限才能使用本程序", Toast.LENGTH_SHORT).show();
+                            finish();
+                            return;
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+            case 2:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initMediaPlayer(R.raw.startmusic);//初始化MediaPlayer的开始运动资源
+                } else {
+                    Toast.makeText(DynamicDemo.this, "拒绝权限将无法使用程序", Toast.LENGTH_SHORT).show();
+                    DynamicDemo.this.finish();
+                }
+            default:
+                break;
+        }
+    }
+
+    private void getPermission() {
+        //权限申请
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(DynamicDemo.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(DynamicDemo.this,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(DynamicDemo.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(DynamicDemo.this, permissions, 1);
+        } else {
+            mLocClient.start();
+        }
+    }
+
+    private Handler mHandler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+            time_hh = new DecimalFormat("00").format(msg.arg1 / 3600);
+            time_mm = new DecimalFormat("00").format(msg.arg1 % 3600 / 60);
+            time_ss = new DecimalFormat("00").format(msg.arg1 % 60);
+            timer_tv_1.setText(time_hh + ":" + time_mm + ":" + time_ss);
+            double dis1 = (double)((msg.arg2 / 10000));
+            dis = dis1 + "";
+            TextView_map_distance.setText(dis + " m");
+            caluli = Double.parseDouble(df.format(72 * dis1/1000)) + "";
+            showcalorie.setText(caluli + " Cal");
+            double timePerKM1 = 0.0;
+            timePerKM = timePerKM1+"";
+            if (dis1 != 0){
+                timePerKM1 = Double.parseDouble(df.format((double)1000*msg.arg1 / dis1));
+                time_m = new DecimalFormat("00").format(timePerKM1 / 60);
+                time_s = new DecimalFormat("00").format(timePerKM1 % 60);
+                showSpeed.setText(time_m + ":" + time_s);
+            } else {
+                showSpeed.setText("0" + ":" + "0");
+            }
+            score_Share = (int)(dis1/1000) * 2 + "";
+            getpoint.setText(score_Share + "");
+            startTime();
+        };
+    };
+    /**
+     * 开始自动减时
+     */
+    private void startTime() {
+        if(timer==null){
+            timer = new Timer();
+        }
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                i++;//自动加1
+                endPlace = new LatLng(mCurrentLat, mCurrentLon);
+                distance = DistanceUtil.getDistance(startPlace, endPlace);
+                Message message = Message.obtain();
+                message.arg1 = i;
+                message.arg2 = (int)(distance * 10000);
+                mHandler.sendMessage(message);//发送消息
+            }
+        };
+        timer.schedule(timerTask, 1000);//1000ms执行一次
+    }
+    /**
+     * 停止自动减时
+     */
+    private void stopTime() {
+        if(timer!=null)
+            timer.cancel();
+    }
+
+    //音乐音效类
+    private void initMediaPlayer(int res) {
+        try {
+            mediaPlayer = MediaPlayer.create(DynamicDemo.this, res);
+            mediaPlayer.prepare(); // 让MediaPlayer进入到准备状态
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

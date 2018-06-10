@@ -3,47 +3,99 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "@drawable/pic4"
+    android:background = "@drawable/share"
     android:weightSum="1">
 
     <LinearLayout
-        android:id="@+id/shareAll"
-        android:layout_width="match_parent"
-        android:layout_height="448dp"
-        android:orientation="vertical"
-        android:layout_weight="0.89">
+            android:id="@+id/shareAll"
+            android:layout_width="match_parent"
+            android:layout_height="520dp"
+            android:background = "@drawable/share"
+            android:orientation="vertical">
 
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="260dp"
+            android:background="@drawable/shape_run"
+            android:layout_weight="0.89">
         <TextView
-            android:id="@+id/tvStartTime"
+            android:id="@+id/sharepoint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#fff"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/bantouming"
             android:textStyle="bold"
-            android:text="" />
-
+            android:text="积分" />
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#aac0c0c0" />
         <TextView
-            android:id="@+id/tvFinishTime"
+            android:id="@+id/sharetime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textSize="30dp"
-            android:textColor="#fff"
+            android:textColor="@color/bantouming"
             android:textStyle="bold"
-            android:text="" />
-
+            android:text="时间" />
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#aac0c0c0" />
         <TextView
-            android:id="@+id/tvDistance"
+            android:id="@+id/sharedistance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textSize="30dp"
-            android:textColor="#fff"
+            android:textColor="@color/bantouming"
             android:textStyle="bold"
-            android:text="" />
+            android:text="距离" />
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#aac0c0c0" />
+        <TextView
+                android:id="@+id/sharespeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/bantouming"
+                android:textStyle="bold"
+                android:text="配速" />
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#aac0c0c0" />
+        <TextView
+                android:id="@+id/sharecalorie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textColor="@color/bantouming"
+                android:textStyle="bold"
+                android:text="卡路里" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 
@@ -52,6 +104,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/bg"
+            android:background="@drawable/bt_shape"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp"
             android:text="返回" />
 
         <Button
@@ -60,7 +117,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="分享本次运动" />
+            android:textColor="@color/bg"
+            android:background="@drawable/bt_shape"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:textSize="20sp"
+            android:text="分享" />
     </LinearLayout>
 
 </LinearLayout>

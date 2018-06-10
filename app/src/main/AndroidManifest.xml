@@ -47,9 +47,6 @@
             <!--</intent-filter>-->
         <!--</activity>-->
 
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".NotificationDemo"></activity>
-        <activity android:name=".GalleryActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".RegistActivity"></activity>
         <activity android:name=".DynamicDemo"></activity>
@@ -59,7 +56,7 @@
         <activity android:name=".ShareActivity"></activity>
         <activity android:name=".MedalActivity"></activity>
         <activity android:name=".ChallengeActivity"></activity>
-
+        <activity android:name=".HistoryBillAcitvity"></activity>
 
         <provider
                 android:name="android.support.v4.content.FileProvider"
@@ -71,10 +68,10 @@
                     android:resource="@xml/file_paths"/>
         </provider>
 
-        <!--定时推送 -->
-        <service android:name="util.NotificationService"
-            android:permission="android.permission.BIND_JOB_SERVICE">
-        </service>
+        <!--&lt;!&ndash;定时推送 &ndash;&gt;-->
+        <!--<service android:name="util.NotificationService"-->
+            <!--android:permission="android.permission.BIND_JOB_SERVICE">-->
+        <!--</service>-->
 
     </application>
 

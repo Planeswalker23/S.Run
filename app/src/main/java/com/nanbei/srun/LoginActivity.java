@@ -58,6 +58,7 @@ public class LoginActivity extends Activity {
                 final String schoolvalue = school.getText().toString();
                 final String passwordvalue = password.getText().toString();
 
+
                 //set学生对象的值
                 user.setId(idvalue);
                 user.setSchool_name(schoolvalue);
@@ -90,8 +91,10 @@ public class LoginActivity extends Activity {
                             e.printStackTrace();
                         }
                         int num = -3;//默认未知情况
+                        String username="";
                         try {
                             num = jsonObject.getInt("statuscode");
+                            username = jsonObject.getString("name");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -108,9 +111,9 @@ public class LoginActivity extends Activity {
                             localUser.setSchool(schoolvalue);
                             localUser.setId(idvalue);
                             localUser.setPassword(passwordvalue);
+                            localUser.setUsernmame(username);
 
                             localUserManager.insert(localUser);
-
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                            intent.putExtra("idvalue", idvalue);

@@ -13,12 +13,17 @@
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="80dp"
             app:mcv_showOtherDates="all"
             app:mcv_selectionColor="@color/colorAccent"
             android:background="@color/bg"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonBackToHome"
+            android:background="@color/quantouming"/>
+
 
 </LinearLayout>

@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ChallengeActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -125,12 +125,12 @@ public class HomeFragment extends Fragment{
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(), "获取积分请求成功", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(getActivity(), "获取积分请求成功", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
 
                     //解析返回值
                     String backcode = response.body().string();
@@ -185,12 +185,12 @@ public class HomeFragment extends Fragment{
 
                 @Override
                 public void onResponse(final Call call, Response response) throws IOException {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(), "获取服务器请求成功", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(getActivity(), "获取服务器请求成功", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
 
                     //解析返回值
                     String backcode = response.body().string();
@@ -218,6 +218,12 @@ public class HomeFragment extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            if (totalDistance != 0.0){
+                                totalDistance = Double.parseDouble(df.format(totalDistance/1000));
+                            }
+                            if (calories != 0.0){
+                                calories = Double.parseDouble(df.format(calories));
+                            }
                             tvDistance.setText("" + totalDistance);
                             tvCalorie.setText("" + calories);
                         }
@@ -268,13 +274,6 @@ public class HomeFragment extends Fragment{
 
                     @Override
                     public void onResponse(final Call call, Response response) throws IOException {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getActivity(), "获取服务器请求成功", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
                         //解析返回值
                         String backcode = response.body().string();
                         System.out.println("backcode2:" + backcode);
@@ -303,7 +302,7 @@ public class HomeFragment extends Fragment{
                             public void run() {
                                 System.out.println(calories);
                                 if (totalDistance != 0.0){
-                                    totalDistance = Double.parseDouble(df.format(totalDistance));
+                                    totalDistance = Double.parseDouble(df.format(totalDistance/1000));
                                 }
                                 if (calories != 0.0){
                                     calories = Double.parseDouble(df.format(calories));

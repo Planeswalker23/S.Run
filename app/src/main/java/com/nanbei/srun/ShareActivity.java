@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,13 +15,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Random;
 
 /**
  * Created by john on 2018/6/3.
@@ -34,15 +30,7 @@ public class ShareActivity  extends Activity {
     Button btSharePicture;
     Button btReturnHome;
 
-//    private long startTime;
-//    private long endTime;
-//    private double distance;
-
-    TextView tvStartTime;
-    TextView tvFinishTime;
-    TextView tvDistance;
-    ImageView imSharePic;
-    LinearLayout shareLayout;
+    private TextView sharepoint,sharetime, sharedistance, sharespeed, sharecalorie;
 
     private static final int WRITE_PERMISSION = 0x01;
 
@@ -52,38 +40,47 @@ public class ShareActivity  extends Activity {
         context = context;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
-//        shareLayout = (LinearLayout)findViewById(R.id.shareAll);
 
 
 /////////随机生成一个share背景图
-        Random rand = new Random();
-        int rr = rand.nextInt(4);
-        LinearLayout temp=(LinearLayout)findViewById(R.id.shareAll);
-        if(rr == 1) {
-            temp.setBackgroundResource(R.drawable.pic1);
-        }else if(rr == 2){
-            temp.setBackgroundResource(R.drawable.pic2);
-        }else if(rr == 3){
-            temp.setBackgroundResource(R.drawable.pic3);
-        }else if(rr == 4){
-            temp.setBackgroundResource(R.drawable.pic4);
-        }
+//        Random rand = new Random();
+//        int rr = rand.nextInt(4);
+//        LinearLayout temp=(LinearLayout)findViewById(R.id.shareAll);
+//        if(rr == 1) {
+//            temp.setBackgroundResource(R.drawable.pic1);
+//        }else if(rr == 2){
+//            temp.setBackgroundResource(R.drawable.pic2);
+//        }else if(rr == 3){
+//            temp.setBackgroundResource(R.drawable.pic3);
+//        }else if(rr == 4){
+//            temp.setBackgroundResource(R.drawable.pic4);
+//        }
 //        view.setImageResource(R.drawable.pic3);
 //        Drawable d=Drawable.createFromPath(String.valueOf(R.drawable.pic1));
 //        temp.setBackgroundDrawable(share1);
 
 
-        tvStartTime = (TextView) findViewById(R.id.tvStartTime);
-        tvFinishTime = (TextView) findViewById(R.id.tvFinishTime);
-        tvDistance = (TextView) findViewById(R.id.tvDistance);
-//        imSharePic.setImageResource(R.drawable.pic3);
-//        imSharePic.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        sharedistance = (TextView) findViewById(R.id.sharedistance);
+        sharepoint = (TextView) findViewById(R.id.sharepoint);
+        sharetime = (TextView) findViewById(R.id.sharetime);
+        sharespeed = (TextView) findViewById(R.id.sharespeed);
+        sharecalorie = (TextView) findViewById(R.id.sharecalorie);
 
         Intent intent = getIntent();
-        tvStartTime.setText("开始运动时间："+intent.getLongExtra("startTime",0));
-        tvFinishTime.setText("结束运动时间："+intent.getLongExtra("endTime",0));
-        tvDistance.setText("运动距离："+intent.getDoubleExtra("distance",0.0f));
-
+        String socre = intent.getStringExtra("score_Share");
+        sharepoint.setText("积分 " + socre);
+        String time_hh = intent.getStringExtra("time_hh");
+        String time_mm = intent.getStringExtra("time_mm");
+        String time_ss = intent.getStringExtra("time_ss");
+        sharetime.setText("运动时间 "+ time_hh + ":" + time_mm + ":" + time_ss);
+        String dis = intent.getStringExtra("dis");
+        sharedistance.setText("距离 " + dis + " m");
+        String cal = intent.getStringExtra("caluli");
+        sharecalorie.setText("卡路里 " + cal + " Cal");
+        String time_m = intent.getStringExtra("time_m");
+        String time_s = intent.getStringExtra("time_s");
+        sharespeed.setText("配速 " + time_m + ":" + time_s);
 
         btReturnHome = (Button) findViewById(R.id.buttonReturnHome);
         btReturnHome.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +121,7 @@ public class ShareActivity  extends Activity {
 
     }
 
-    private Bitmap getBitmap(View view) throws Exception {
+    private Bitmap getBitmap(View view) {
 
         View screenView = getWindow().getDecorView();
         screenView.setDrawingCacheEnabled(true);

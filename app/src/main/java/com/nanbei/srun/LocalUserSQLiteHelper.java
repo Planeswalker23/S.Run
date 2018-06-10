@@ -12,6 +12,7 @@ public class LocalUserSQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table if not exists localuser" +
                 "(id varchar(20) primary key," +
+                "username varchar(20)," +
                 "password varchar(20)," +
                 "school varchar(30))");
     }

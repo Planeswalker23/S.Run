@@ -23,6 +23,7 @@ public class LocalUserManager {
         SQLiteDatabase database = sqLiteOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("school", localUser.getSchool());
+        values.put("username",localUser.getUsernmame());
         values.put("id", localUser.getId());
         values.put("password", localUser.getPassword());
         database.insert("localuser", null, values);
@@ -50,12 +51,14 @@ public class LocalUserManager {
         localUser.setSchool("#");
         localUser.setId("#");
         localUser.setPassword("");
+        localUser.setUsernmame("");
 
         while (cursor.moveToNext()) {
             localUser.setId(cursor.getString(0));
-            localUser.setPassword(cursor.getString(1));
-            localUser.setSchool(cursor.getString(2));
-            System.out.println("local_uid::"+cursor.getString(0)+" "+cursor.getString(2));
+            localUser.setUsernmame(cursor.getString(1));
+            localUser.setPassword(cursor.getString(2));
+            localUser.setSchool(cursor.getString(3));
+            System.out.println("local_uid::"+cursor.getString(0)+" "+cursor.getString(3));
         }
         cursor.close();
         return localUser;

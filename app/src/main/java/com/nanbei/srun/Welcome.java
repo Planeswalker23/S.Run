@@ -21,7 +21,7 @@ public class Welcome extends Activity {
                 startActivity(it);
                 finish();
             }
-        },1*1000);
+        },2*1000);
     }
 
 }
