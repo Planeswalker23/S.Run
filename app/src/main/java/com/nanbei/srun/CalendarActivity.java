@@ -62,7 +62,7 @@ public class CalendarActivity extends Activity implements OnDateSelectedListener
         widget.setOnDateChangedListener(this);
 
         //为dates中添加日期
-        AddMyRunDateToCollection("1");
+        AddMyRunDateToCollection("2");
         //通过handler得到msg中的dates数据
         handler = new Handler(){
             @Override
@@ -124,7 +124,7 @@ public class CalendarActivity extends Activity implements OnDateSelectedListener
                     int month = monthJson.getAsInt() - 1;
                     JsonPrimitive dayJson = element.getAsJsonPrimitive("day");
                     int day = dayJson.getAsInt();
-//                    System.out.println("解析之后的年月日：" + year + month + day);
+                    System.out.println("解析之后的年月日：" + year + month + day);
                     dates.add(new CalendarDay(year, month, day));
                     Message message = Message.obtain();
                     message.what = 0;
