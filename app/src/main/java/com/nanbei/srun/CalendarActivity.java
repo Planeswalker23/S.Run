@@ -35,11 +35,16 @@ public class CalendarActivity extends Activity implements OnDateSelectedListener
     NotificationManager manager;//通知控制类
     int notification_ID = 1;
 
+    private String idvalue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        Intent intent = getIntent();
+        idvalue = intent.getStringExtra("idvalue");
+        System.out.println("rili"+idvalue);
 
         manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -62,7 +67,7 @@ public class CalendarActivity extends Activity implements OnDateSelectedListener
         widget.setOnDateChangedListener(this);
 
         //为dates中添加日期
-        AddMyRunDateToCollection("2");
+        AddMyRunDateToCollection(idvalue);
         //通过handler得到msg中的dates数据
         handler = new Handler(){
             @Override

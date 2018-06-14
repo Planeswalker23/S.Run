@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CalendarActivity.class);
+                intent.putExtra("idvalue",idvalue);
                 startActivityForResult(intent, 1);
 
             }
@@ -146,7 +147,7 @@ public class HomeFragment extends Fragment{
                     int score = 0;
                     int ranking = 0;
                     try {
-                        id = jsonObject.getString("id");
+                        //id = jsonObject.getString("id");
                         score = jsonObject.getInt("score");
                         ranking = jsonObject.getInt("ranking");
                     } catch (JSONException e) {

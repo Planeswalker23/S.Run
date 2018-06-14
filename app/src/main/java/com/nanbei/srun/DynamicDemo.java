@@ -162,7 +162,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
             ActivityCompat.requestPermissions(DynamicDemo.this, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }else{
-            initMediaPlayer(R.raw.startmusic);//初始化MediaPlayer的开始运动资源
+            initMediaPlayer(R.raw.runmusic);//初始化MediaPlayer的开始运动资源
         }
 
         initView();//开始停止按钮初始化
@@ -392,7 +392,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                     stopTime();
 
                     mediaPlayer.reset(); // 停止播放
-                    initMediaPlayer(R.raw.endmusic);//初始化MediaPlayer的结束运动资源
+                    initMediaPlayer(R.raw.runmusic);//初始化MediaPlayer的结束运动资源
                     mediaPlayer.start();
 
                     //跳到分享页面
@@ -498,7 +498,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                         startTime = System.currentTimeMillis();//程序开始记录时间
 
                         if (!mediaPlayer.isPlaying()) {
-                            initMediaPlayer(R.raw.startmusic);//初始化MediaPlayer的开始运动资源
+                            initMediaPlayer(R.raw.runmusic);//初始化MediaPlayer的开始运动资源
                             mediaPlayer.start(); // 开始播放
                         }
 
@@ -693,7 +693,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                 break;
             case 2:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    initMediaPlayer(R.raw.startmusic);//初始化MediaPlayer的开始运动资源
+                    initMediaPlayer(R.raw.runmusic);//初始化MediaPlayer的开始运动资源
                 } else {
                     Toast.makeText(DynamicDemo.this, "拒绝权限将无法使用程序", Toast.LENGTH_SHORT).show();
                     DynamicDemo.this.finish();
